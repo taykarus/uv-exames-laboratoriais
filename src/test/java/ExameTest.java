@@ -11,8 +11,7 @@ class ExameTest {
             exame.setTriglicerides(-1);
             exame.obterNivelTriglicerides();
             fail();
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals("Triglicerides deve ser maior do que 0", e.getMessage());
         }
     }
@@ -24,8 +23,7 @@ class ExameTest {
             exame.setTriglicerides(0);
             exame.obterNivelTriglicerides();
             fail();
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals("Triglicerides deve ser maior do que 0", e.getMessage());
         }
     }
@@ -65,8 +63,7 @@ class ExameTest {
             exame.setColesterolTotal(-1);
             exame.obterNivelColesterolTotal();
             fail();
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals("Colesterol total deve ser maior do que 0", e.getMessage());
         }
     }
@@ -78,8 +75,7 @@ class ExameTest {
             exame.setColesterolTotal(0);
             exame.obterNivelColesterolTotal();
             fail();
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals("Colesterol total deve ser maior do que 0", e.getMessage());
         }
     }
@@ -112,8 +108,7 @@ class ExameTest {
             exame.setColesterolHDL(-1);
             exame.obterNivelColesterolHDL();
             fail();
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals("Colesterol HDL deve ser maior do que 0", e.getMessage());
         }
     }
@@ -125,8 +120,7 @@ class ExameTest {
             exame.setColesterolHDL(0);
             exame.obterNivelColesterolHDL();
             fail();
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals("Colesterol HDL deve ser maior do que 0", e.getMessage());
         }
     }
@@ -150,5 +144,64 @@ class ExameTest {
         Exame exame = new Exame();
         exame.setColesterolHDL(61);
         assertEquals("Desejável", exame.obterNivelColesterolHDL());
+    }
+
+    @Test
+    public void deveTestarColesterolLDLNegativo() {
+        try {
+            Exame exame = new Exame();
+            exame.setColesterolLDL(-1);
+            exame.obterNivelColesterolLDL();
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("Colesterol LDL deve ser maior do que 0", e.getMessage());
+        }
+    }
+
+    @Test
+    public void deveTestarColesterolLDLZerado() {
+        try {
+            Exame exame = new Exame();
+            exame.setColesterolLDL(0);
+            exame.obterNivelColesterolLDL();
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("Colesterol LDL deve ser maior do que 0", e.getMessage());
+        }
+    }
+
+    @Test
+    public void deveTestarColesterolLDLOtimo() {
+        Exame exame = new Exame();
+        exame.setColesterolLDL(99);
+        assertEquals("Ótimo", exame.obterNivelColesterolLDL());
+    }
+
+    @Test
+    public void deveTestarColesterolLDLDesejavel() {
+        Exame exame = new Exame();
+        exame.setColesterolLDL(129);
+        assertEquals("Desejável", exame.obterNivelColesterolLDL());
+    }
+
+    @Test
+    public void deveTestarColesterolLDLLimitrofe() {
+        Exame exame = new Exame();
+        exame.setColesterolLDL(159);
+        assertEquals("Limítrofe", exame.obterNivelColesterolLDL());
+    }
+
+    @Test
+    public void deveTestarColesterolLDLAlto() {
+        Exame exame = new Exame();
+        exame.setColesterolLDL(189);
+        assertEquals("Alto", exame.obterNivelColesterolLDL());
+    }
+
+    @Test
+    public void deveTestarColesterolLDLMuitoAlto() {
+        Exame exame = new Exame();
+        exame.setColesterolLDL(190);
+        assertEquals("Muito alto", exame.obterNivelColesterolLDL());
     }
 }
