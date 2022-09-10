@@ -249,4 +249,57 @@ class ExameTest {
         exame.setColesterolVLDL(41);
         assertEquals("Nível elevado", exame.obterNivelColesterolVLDL());
     }
+
+    // glicose
+    @Test
+    public void deveTestarGlicoseNegativa() {
+        try {
+            Exame exame = new Exame();
+            exame.setGlicose(-1);
+            exame.obterNivelGlicose();
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("Glicose deve ser maior do que 0", e.getMessage());
+        }
+    }
+
+    @Test
+    public void deveTestarGlicoseZerada() {
+        try {
+            Exame exame = new Exame();
+            exame.setGlicose(0);
+            exame.obterNivelGlicose();
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("Glicose deve ser maior do que 0", e.getMessage());
+        }
+    }
+
+    @Test
+    public void deveTestarGlicoseHipoglicemia() {
+        Exame exame = new Exame();
+        exame.setGlicose(59);
+        assertEquals("Hipoglicemia", exame.obterNivelGlicose());
+    }
+
+    @Test
+    public void deveTestarGlicoseDesejavel() {
+        Exame exame = new Exame();
+        exame.setGlicose(99);
+        assertEquals("Desejável", exame.obterNivelGlicose());
+    }
+
+    @Test
+    public void deveTestarGlicoseGlicemiaJejumInapropriada() {
+        Exame exame = new Exame();
+        exame.setGlicose(125);
+        assertEquals("Glicemia de jejum inapropriada", exame.obterNivelGlicose());
+    }
+
+    @Test
+    public void deveTestarGlicoseDiabetes() {
+        Exame exame = new Exame();
+        exame.setGlicose(126);
+        assertEquals("Diabetes", exame.obterNivelGlicose());
+    }
 }
