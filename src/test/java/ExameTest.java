@@ -54,7 +54,54 @@ class ExameTest {
     @Test
     public void deveTestarTrigliceridesMuitoAlto() {
         Exame exame = new Exame();
-        exame.setTriglicerides(501);
+        exame.setTriglicerides(500);
         assertEquals("Nível muito alto", exame.obterNivelTriglicerides());
+    }
+
+    @Test
+    public void deveTestarColesterolTotalNegativo() {
+        try {
+            Exame exame = new Exame();
+            exame.setColesterolTotal(-1);
+            exame.obterNivelColesterolTotal();
+            fail();
+        }
+        catch (IllegalArgumentException e) {
+            assertEquals("Colesterol total deve ser maior do que 0", e.getMessage());
+        }
+    }
+
+    @Test
+    public void deveTestarColesterolTotalZerado() {
+        try {
+            Exame exame = new Exame();
+            exame.setColesterolTotal(0);
+            exame.obterNivelColesterolTotal();
+            fail();
+        }
+        catch (IllegalArgumentException e) {
+            assertEquals("Colesterol total deve ser maior do que 0", e.getMessage());
+        }
+    }
+
+    @Test
+    public void deveTestarColesterolTotalDesejavel() {
+        Exame exame = new Exame();
+        exame.setColesterolTotal(199);
+        assertEquals("Desejável", exame.obterNivelColesterolTotal());
+    }
+
+    @Test
+    public void deveTestarColesterolTotalLimitrofe() {
+        Exame exame = new Exame();
+        exame.setColesterolTotal(239);
+        assertEquals("Limítrofe", exame.obterNivelColesterolTotal());
+    }
+
+    @Test
+    public void deveTestarColesterolTotalElevado() {
+        Exame exame = new Exame();
+        exame.setColesterolTotal(240);
+        assertEquals("Elevado", exame.obterNivelColesterolTotal());
     }
 }
