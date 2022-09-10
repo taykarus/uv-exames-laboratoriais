@@ -25,11 +25,16 @@ public class Exame {
     private static final int COLESTEROL_VLDL_DESEJAVEL = 30;
     private static final int COLESTEROL_VLDL_LIMITROFE = 40;
 
+    private static final int GLICOSE_HIPOGLICEMIA = 60;
+    private static final int GLICOSE_DESEJAVEL = 100;
+    private static final int GLICOSE_GLICEMIA_JEJUM_INAPROPRIADA = 125;
+
     private int triglicerides;
     private int colesterolTotal;
     private int colesterolHDL;
     private int colesterolLDL;
     private int colesterolVLDL;
+    private int glicose;
 
     public String obterNivelTriglicerides() {
         if (this.triglicerides <= 0) {
@@ -99,6 +104,21 @@ public class Exame {
             return "Nivel limítrofe";
         } else {
             return "Nível elevado";
+        }
+    }
+
+    public String obterNivelGlicose() {
+        if (this.glicose <= 0) {
+            throw new IllegalArgumentException("Glicose deve ser maior do que 0");
+        }
+        if (this.glicose < GLICOSE_HIPOGLICEMIA) {
+            return "Hipoglicemia";
+        } else if (this.glicose < GLICOSE_DESEJAVEL) {
+            return "Desejável";
+        } else if (this.glicose <= GLICOSE_GLICEMIA_JEJUM_INAPROPRIADA) {
+            return "Glicemia de jejum inapropriada";
+        } else {
+            return "Diabetes";
         }
     }
 }
