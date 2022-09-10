@@ -204,4 +204,49 @@ class ExameTest {
         exame.setColesterolLDL(190);
         assertEquals("Muito alto", exame.obterNivelColesterolLDL());
     }
+
+    @Test
+    public void deveTestarColesterolVLDLNegativo() {
+        try {
+            Exame exame = new Exame();
+            exame.setColesterolVLDL(-1);
+            exame.obterNivelColesterolVLDL();
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("Colesterol VLDL deve ser maior do que 0", e.getMessage());
+        }
+    }
+
+    @Test
+    public void deveTestarColesterolVLDLZerado() {
+        try {
+            Exame exame = new Exame();
+            exame.setColesterolVLDL(0);
+            exame.obterNivelColesterolVLDL();
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("Colesterol VLDL deve ser maior do que 0", e.getMessage());
+        }
+    }
+
+    @Test
+    public void deveTestarColesterolVLDLDesejavel() {
+        Exame exame = new Exame();
+        exame.setColesterolVLDL(29);
+        assertEquals("Nivel desejável", exame.obterNivelColesterolVLDL());
+    }
+
+    @Test
+    public void deveTestarColesterolVLDLLimitrofe() {
+        Exame exame = new Exame();
+        exame.setColesterolVLDL(40);
+        assertEquals("Nivel limítrofe", exame.obterNivelColesterolVLDL());
+    }
+
+    @Test
+    public void deveTestarColesterolVLDLElevado() {
+        Exame exame = new Exame();
+        exame.setColesterolVLDL(41);
+        assertEquals("Nível elevado", exame.obterNivelColesterolVLDL());
+    }
 }
