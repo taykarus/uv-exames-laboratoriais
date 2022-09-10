@@ -104,4 +104,51 @@ class ExameTest {
         exame.setColesterolTotal(240);
         assertEquals("Elevado", exame.obterNivelColesterolTotal());
     }
+
+    @Test
+    public void deveTestarColesterolHDLNegativo() {
+        try {
+            Exame exame = new Exame();
+            exame.setColesterolHDL(-1);
+            exame.obterNivelColesterolHDL();
+            fail();
+        }
+        catch (IllegalArgumentException e) {
+            assertEquals("Colesterol HDL deve ser maior do que 0", e.getMessage());
+        }
+    }
+
+    @Test
+    public void deveTestarColesterolHDLZerado() {
+        try {
+            Exame exame = new Exame();
+            exame.setColesterolHDL(0);
+            exame.obterNivelColesterolHDL();
+            fail();
+        }
+        catch (IllegalArgumentException e) {
+            assertEquals("Colesterol HDL deve ser maior do que 0", e.getMessage());
+        }
+    }
+
+    @Test
+    public void deveTestarColesterolHDLBaixo() {
+        Exame exame = new Exame();
+        exame.setColesterolHDL(39);
+        assertEquals("Baixo", exame.obterNivelColesterolHDL());
+    }
+
+    @Test
+    public void deveTestarColesterolHDLNormal() {
+        Exame exame = new Exame();
+        exame.setColesterolHDL(60);
+        assertEquals("Normal", exame.obterNivelColesterolHDL());
+    }
+
+    @Test
+    public void deveTestarColesterolHDLDesejavel() {
+        Exame exame = new Exame();
+        exame.setColesterolHDL(61);
+        assertEquals("Desejável", exame.obterNivelColesterolHDL());
+    }
 }
