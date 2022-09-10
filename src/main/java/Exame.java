@@ -2,13 +2,15 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 public class Exame {
 
     private static final int TRIGLICERIDES_DESEJAVEL = 150;
     private static final int TRIGLICERIDES_LIMITROFE = 200;
     private static final int TRIGLICERIDES_ALTO = 500;
-    
+
     private int triglicerides;
 
     public String obterNivelTriglicerides() {

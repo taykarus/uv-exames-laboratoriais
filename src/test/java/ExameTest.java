@@ -1,5 +1,60 @@
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ExameTest {
 
+    @Test
+    public void deveTestarTrigliceridesNegativo() {
+        try {
+            Exame exame = new Exame();
+            exame.setTriglicerides(-1);
+            exame.obterNivelTriglicerides();
+            fail();
+        }
+        catch (IllegalArgumentException e) {
+            assertEquals("Triglicerides deve ser maior do que 0", e.getMessage());
+        }
+    }
+
+    @Test
+    public void deveTestarTriglicerideZerado() {
+        try {
+            Exame exame = new Exame();
+            exame.setTriglicerides(0);
+            exame.obterNivelTriglicerides();
+            fail();
+        }
+        catch (IllegalArgumentException e) {
+            assertEquals("Triglicerides deve ser maior do que 0", e.getMessage());
+        }
+    }
+
+    @Test
+    public void deveTestarTrigliceridesDesejavel() {
+        Exame exame = new Exame();
+        exame.setTriglicerides(149);
+        assertEquals("Nivel desejável", exame.obterNivelTriglicerides());
+    }
+
+    @Test
+    public void deveTestarTrigliceridesLimitrofe() {
+        Exame exame = new Exame();
+        exame.setTriglicerides(199);
+        assertEquals("Nível limitrofe", exame.obterNivelTriglicerides());
+    }
+
+    @Test
+    public void deveTestarTrigliceridesAlto() {
+        Exame exame = new Exame();
+        exame.setTriglicerides(499);
+        assertEquals("Nível alto", exame.obterNivelTriglicerides());
+    }
+
+    @Test
+    public void deveTestarTrigliceridesMuitoAlto() {
+        Exame exame = new Exame();
+        exame.setTriglicerides(501);
+        assertEquals("Nível muito alto", exame.obterNivelTriglicerides());
+    }
 }
