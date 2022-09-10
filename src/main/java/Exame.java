@@ -22,10 +22,14 @@ public class Exame {
     private static final int COLESTEROL_LDL_LIMITROFE = 160;
     private static final int COLESTEROL_LDL_ALTO = 190;
 
+    private static final int COLESTEROL_VLDL_DESEJAVEL = 30;
+    private static final int COLESTEROL_VLDL_LIMITROFE = 40;
+
     private int triglicerides;
     private int colesterolTotal;
     private int colesterolHDL;
     private int colesterolLDL;
+    private int colesterolVLDL;
 
     public String obterNivelTriglicerides() {
         if (this.triglicerides <= 0) {
@@ -82,6 +86,19 @@ public class Exame {
             return "Alto";
         } else {
             return "Muito alto";
+        }
+    }
+
+    public String obterNivelColesterolVLDL() {
+        if (this.colesterolVLDL <= 0) {
+            throw new IllegalArgumentException("Colesterol VLDL deve ser maior do que 0");
+        }
+        if (this.colesterolVLDL < COLESTEROL_VLDL_DESEJAVEL) {
+            return "Nivel desejável";
+        } else if (this.colesterolVLDL <= COLESTEROL_VLDL_LIMITROFE) {
+            return "Nivel limítrofe";
+        } else {
+            return "Nível elevado";
         }
     }
 }
